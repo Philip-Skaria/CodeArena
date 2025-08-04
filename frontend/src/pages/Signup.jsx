@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -7,6 +8,8 @@ const Signup = () => {
     password: '',
     confirmPassword: ''
   });
+
+  const navigate=useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -18,10 +21,11 @@ const Signup = () => {
   const handleSubmit = () => {
     console.log('Signup data:', formData);
     // Handle signup logic here
+    navigate('/home');
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-800 to-slate-700 flex items-center justify-center relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br bg-gray-900 flex items-center justify-center relative overflow-hidden">
       <div className="absolute inset-0">
         <div className="absolute top-16 left-8 w-96 h-60 bg-gradient-to-br from-orange-500 to-orange-600 rounded-3xl transform -rotate-12 opacity-90"></div>
         <div className="absolute bottom-20 left-12 w-72 h-72 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full opacity-80"></div>

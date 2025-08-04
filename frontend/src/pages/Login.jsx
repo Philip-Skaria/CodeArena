@@ -1,18 +1,22 @@
 import React, { useState } from 'react';
+import {useNavigate} from 'react-router-dom' 
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const navigate=useNavigate()
+
   const handleLogin = (e) => {
     e.preventDefault();
     console.log('Login attempted with:', { email, password });
     // Add your login logic here
+    navigate('/home')
   };
 
   const handleRegister = () => {
-    console.log('Navigate to register page');
     // Add navigation to register page
+    navigate('/signup');
   };
 
   const handleForgotPassword = () => {
@@ -88,13 +92,13 @@ const Login = () => {
           }}
         />
 
-        {/* Scattered dots for detail */}
+        {/* Scattered dots for detail
         <div className="absolute top-1/4 left-1/3 w-2 h-2 bg-orange-300 rounded-full opacity-60 animate-ping" />
         <div className="absolute top-1/3 right-1/4 w-1 h-1 bg-yellow-300 rounded-full opacity-80" />
         <div className="absolute bottom-1/3 left-1/4 w-3 h-3 bg-orange-400 rounded-full opacity-50" />
         <div className="absolute top-1/2 left-1/5 w-1 h-1 bg-yellow-400 rounded-full opacity-70 animate-pulse" />
         <div className="absolute bottom-1/4 right-1/3 w-2 h-2 bg-orange-300 rounded-full opacity-60" />
-        <div className="absolute top-3/4 left-1/2 w-1 h-1 bg-yellow-200 rounded-full opacity-50" />
+        <div className="absolute top-3/4 left-1/2 w-1 h-1 bg-yellow-200 rounded-full opacity-50" /> */}
       </div>
 
       {/* Login Form */}
@@ -102,7 +106,7 @@ const Login = () => {
         {/* Form Header */}
         <div className="text-center mb-6">
           <h2 className="text-xl font-medium text-gray-800 mb-2">Login to your account</h2>
-          <p className="text-sm text-gray-700">Compete with your friends on LeetCode</p>
+          <p className="text-sm text-gray-700">Compete with your friends on popular coding platforms</p>
         </div>
 
         {/* Login Form */}
@@ -156,7 +160,7 @@ const Login = () => {
       </div>
 
       {/* Custom CSS for animations */}
-      <style dangerouslySetInnerHTML={{
+      {/* <style dangerouslySetInnerHTML={{
         __html: `
           @keyframes float1 {
             0%, 100% { 
@@ -194,7 +198,7 @@ const Login = () => {
             }
           }
         `
-      }} />
+      }} /> */}
     </div>
   );
 };

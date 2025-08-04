@@ -1,369 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Trophy, Target, Users, TrendingUp, Calendar, Star, Zap, Code, Award, ArrowRight, Shield, Globe } from 'lucide-react';
+import { Trophy, Target, Users, TrendingUp, Calendar, Star, Zap, Code, Award } from 'lucide-react';
 
-// Welcome Screen Component
-const Home = ({ onLoginClick, onSignupClick }) => {
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-800 to-slate-700 flex items-center justify-center relative overflow-hidden">
-      {/* Background Geometric Shapes */}
-      <div className="absolute inset-0">
-        <div className="absolute top-16 left-8 w-96 h-60 bg-gradient-to-br from-orange-500 to-orange-600 rounded-3xl transform -rotate-12 opacity-90"></div>
-        <div className="absolute bottom-20 left-12 w-72 h-72 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full opacity-80"></div>
-        <div className="absolute top-32 right-16 w-80 h-48 bg-gradient-to-br from-yellow-300 to-yellow-500 rounded-3xl transform rotate-25 opacity-70"></div>
-        <div className="absolute top-1/4 left-1/3 w-3 h-3 bg-orange-400 rounded-full opacity-60"></div>
-        <div className="absolute bottom-1/3 right-1/4 w-2 h-2 bg-yellow-400 rounded-full opacity-50"></div>
-        <div className="absolute top-2/3 right-1/3 w-4 h-4 bg-orange-300 rounded-full opacity-40"></div>
-      </div>
-
-      {/* Welcome Content */}
-      <div className="relative z-10 text-center max-w-4xl mx-auto px-6">
-        <div className="mb-8">
-          <h1 className="text-6xl md:text-7xl font-bold text-white mb-4">
-            Code<span className="text-orange-400">Arena</span>
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-300 mb-8">
-            Battle Code. Prove Skills. Win Glory.
-          </p>
-          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            Track your progress across all major coding platforms, compete with friends, 
-            and climb the leaderboards in the ultimate coding competition hub.
-          </p>
-        </div>
-
-        {/* Feature Highlights */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <div className="bg-slate-800 bg-opacity-60 backdrop-blur-sm rounded-2xl p-6">
-            <Globe className="w-12 h-12 text-orange-400 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-white mb-2">Multi-Platform Tracking</h3>
-            <p className="text-gray-400">Connect LeetCode, Codeforces, CodeChef, and more</p>
-          </div>
-          <div className="bg-slate-800 bg-opacity-60 backdrop-blur-sm rounded-2xl p-6">
-            <Trophy className="w-12 h-12 text-yellow-400 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-white mb-2">Real-time Leaderboards</h3>
-            <p className="text-gray-400">Compete with friends and track daily progress</p>
-          </div>
-          <div className="bg-slate-800 bg-opacity-60 backdrop-blur-sm rounded-2xl p-6">
-            <Zap className="w-12 h-12 text-blue-400 mx-auto mb-4" />
-            <h3 className="text-xl font-semibold text-white mb-2">Streak Tracking</h3>
-            <p className="text-gray-400">Maintain consistency and build coding habits</p>
-          </div>
-        </div>
-
-        {/* Call to Action Buttons */}
-        <div className="space-y-4 md:space-y-0 md:space-x-6 md:flex md:justify-center">
-          <button
-            onClick={onLoginClick}
-            className="w-full md:w-auto bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold py-4 px-8 rounded-full hover:from-orange-600 hover:to-orange-700 transition-all duration-200 transform hover:scale-105 flex items-center justify-center space-x-2"
-          >
-            <Shield className="w-5 h-5" />
-            <span>Login to Continue</span>
-            <ArrowRight className="w-5 h-5" />
-          </button>
-          <button
-            onClick={onSignupClick}
-            className="w-full md:w-auto bg-transparent border-2 border-orange-400 text-orange-400 font-semibold py-4 px-8 rounded-full hover:bg-orange-400 hover:text-white transition-all duration-200 transform hover:scale-105"
-          >
-            Create Account
-          </button>
-        </div>
-
-        <p className="text-gray-500 mt-8 text-sm">
-          Join thousands of developers already competing on CodeArena
-        </p>
-      </div>
-    </div>
-  );
-};
-
-// Login Screen Component
-const LoginScreen = ({ onLoginSuccess, onBackToWelcome, onSignupClick }) => {
-  const [formData, setFormData] = useState({
-    email: '',
-    password: ''
-  });
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-    setError('');
-  };
-
-  const handleSubmit = async () => {
-    setIsLoading(true);
-    setError('');
-    
-    // Simulate API call
-    setTimeout(() => {
-      // Demo credentials for testing
-      if (formData.email === 'demo@codearena.com' && formData.password === 'demo123') {
-        onLoginSuccess();
-      } else {
-        setError('Invalid credentials. Try demo@codearena.com / demo123');
-      }
-      setIsLoading(false);
-    }, 1500);
-  };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-800 to-slate-700 flex items-center justify-center relative overflow-hidden">
-      {/* Background Geometric Shapes */}
-      <div className="absolute inset-0">
-        <div className="absolute top-16 left-8 w-96 h-60 bg-gradient-to-br from-orange-500 to-orange-600 rounded-3xl transform -rotate-12 opacity-90"></div>
-        <div className="absolute bottom-20 left-12 w-72 h-72 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full opacity-80"></div>
-        <div className="absolute top-32 right-16 w-80 h-48 bg-gradient-to-br from-yellow-300 to-yellow-500 rounded-3xl transform rotate-25 opacity-70"></div>
-        <div className="absolute top-1/4 left-1/3 w-3 h-3 bg-orange-400 rounded-full opacity-60"></div>
-        <div className="absolute bottom-1/3 right-1/4 w-2 h-2 bg-yellow-400 rounded-full opacity-50"></div>
-        <div className="absolute top-2/3 right-1/3 w-4 h-4 bg-orange-300 rounded-full opacity-40"></div>
-      </div>
-
-      {/* Back Button */}
-      <button
-        onClick={onBackToWelcome}
-        className="absolute top-8 left-8 z-20 text-white hover:text-orange-400 transition-colors"
-      >
-        ← Back to Welcome
-      </button>
-
-      {/* CodeArena Title */}
-      <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-20">
-        <h1 className="text-white text-3xl font-bold">CodeArena</h1>
-      </div>
-
-      {/* Login Form */}
-      <div className="relative z-10 bg-gray-400 bg-opacity-90 backdrop-blur-sm rounded-3xl p-8 w-full max-w-md mx-4">
-        <div className="text-center mb-6">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-2">Login to your account</h2>
-          <p className="text-gray-600">Compete with your friends on LeetCode</p>
-        </div>
-
-        {error && (
-          <div className="mb-4 p-3 bg-red-100 border border-red-300 text-red-700 rounded-lg text-sm">
-            {error}
-          </div>
-        )}
-
-        <div className="space-y-4">
-          <div>
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full px-6 py-4 bg-gray-600 bg-opacity-70 text-white placeholder-gray-300 rounded-full border-0 focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all"
-            />
-          </div>
-
-          <div>
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleChange}
-              className="w-full px-6 py-4 bg-gray-600 bg-opacity-70 text-white placeholder-gray-300 rounded-full border-0 focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all"
-            />
-          </div>
-
-          <button
-            onClick={handleSubmit}
-            disabled={isLoading}
-            className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold py-4 px-6 rounded-full hover:from-orange-600 hover:to-orange-700 transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-gray-400 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {isLoading ? 'Logging in...' : 'Login'}
-          </button>
-        </div>
-
-        <div className="flex justify-between items-center mt-6 text-sm">
-          <button 
-            onClick={onSignupClick}
-            className="text-gray-700 hover:text-gray-900 underline transition-colors"
-          >
-            Create Account
-          </button>
-          <button className="text-gray-700 hover:text-gray-900 underline transition-colors">
-            Forgot Password?
-          </button>
-        </div>
-
-        <div className="mt-4 p-3 bg-blue-50 border border-blue-200 rounded-lg text-sm text-blue-800">
-          <strong>Demo:</strong> demo@codearena.com / demo123
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// Signup Screen Component
-const SignupScreen = ({ onSignupSuccess, onBackToWelcome, onLoginClick }) => {
-  const [formData, setFormData] = useState({
-    username: '',
-    email: '',
-    password: '',
-    confirmPassword: ''
-  });
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
-
-  const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    });
-    setError('');
-  };
-
-  const handleSubmit = async () => {
-    setIsLoading(true);
-    setError('');
-    
-    // Basic validation
-    if (formData.password !== formData.confirmPassword) {
-      setError('Passwords do not match');
-      setIsLoading(false);
-      return;
-    }
-
-    if (formData.password.length < 6) {
-      setError('Password must be at least 6 characters');
-      setIsLoading(false);
-      return;
-    }
-    
-    // Simulate API call
-    setTimeout(() => {
-      // For demo purposes, any valid signup redirects to login
-      if (formData.email && formData.password && formData.username) {
-        alert('Account created successfully! Please login.');
-        onLoginClick();
-      } else {
-        setError('Please fill in all fields');
-      }
-      setIsLoading(false);
-    }, 1500);
-  };
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-800 to-slate-700 flex items-center justify-center relative overflow-hidden">
-      {/* Background Geometric Shapes */}
-      <div className="absolute inset-0">
-        <div className="absolute top-16 left-8 w-96 h-60 bg-gradient-to-br from-orange-500 to-orange-600 rounded-3xl transform -rotate-12 opacity-90"></div>
-        <div className="absolute bottom-20 left-12 w-72 h-72 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full opacity-80"></div>
-        <div className="absolute top-32 right-16 w-80 h-48 bg-gradient-to-br from-yellow-300 to-yellow-500 rounded-3xl transform rotate-25 opacity-70"></div>
-        <div className="absolute top-1/4 left-1/3 w-3 h-3 bg-orange-400 rounded-full opacity-60"></div>
-        <div className="absolute bottom-1/3 right-1/4 w-2 h-2 bg-yellow-400 rounded-full opacity-50"></div>
-        <div className="absolute top-2/3 right-1/3 w-4 h-4 bg-orange-300 rounded-full opacity-40"></div>
-      </div>
-
-      {/* Back Button */}
-      <button
-        onClick={onBackToWelcome}
-        className="absolute top-8 left-8 z-20 text-white hover:text-orange-400 transition-colors"
-      >
-        ← Back to Welcome
-      </button>
-
-      {/* CodeArena Title */}
-      <div className="absolute top-8 left-1/2 transform -translate-x-1/2 z-20">
-        <h1 className="text-white text-3xl font-bold">CodeArena</h1>
-      </div>
-
-      {/* Signup Form */}
-      <div className="relative z-10 bg-gray-400 bg-opacity-90 backdrop-blur-sm rounded-3xl p-8 w-full max-w-md mx-4">
-        <div className="text-center mb-6">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-2">Create your account</h2>
-          <p className="text-gray-600">Join CodeArena and start competing</p>
-        </div>
-
-        {error && (
-          <div className="mb-4 p-3 bg-red-100 border border-red-300 text-red-700 rounded-lg text-sm">
-            {error}
-          </div>
-        )}
-
-        <div className="space-y-4">
-          <div>
-            <input
-              type="text"
-              name="username"
-              placeholder="Username"
-              value={formData.username}
-              onChange={handleChange}
-              className="w-full px-6 py-4 bg-gray-600 bg-opacity-70 text-white placeholder-gray-300 rounded-full border-0 focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all"
-            />
-          </div>
-
-          <div>
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={formData.email}
-              onChange={handleChange}
-              className="w-full px-6 py-4 bg-gray-600 bg-opacity-70 text-white placeholder-gray-300 rounded-full border-0 focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all"
-            />
-          </div>
-
-          <div>
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleChange}
-              className="w-full px-6 py-4 bg-gray-600 bg-opacity-70 text-white placeholder-gray-300 rounded-full border-0 focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all"
-            />
-          </div>
-
-          <div>
-            <input
-              type="password"
-              name="confirmPassword"
-              placeholder="Confirm Password"
-              value={formData.confirmPassword}
-              onChange={handleChange}
-              className="w-full px-6 py-4 bg-gray-600 bg-opacity-70 text-white placeholder-gray-300 rounded-full border-0 focus:outline-none focus:ring-2 focus:ring-orange-500 transition-all"
-            />
-          </div>
-
-          <button
-            onClick={handleSubmit}
-            disabled={isLoading}
-            className="w-full bg-gradient-to-r from-orange-500 to-orange-600 text-white font-semibold py-4 px-6 rounded-full hover:from-orange-600 hover:to-orange-700 transition-all duration-200 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:ring-offset-gray-400 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {isLoading ? 'Creating Account...' : 'Sign Up'}
-          </button>
-        </div>
-
-        <div className="flex justify-between items-center mt-6 text-sm">
-          <button 
-            onClick={onLoginClick}
-            className="text-gray-700 hover:text-gray-900 underline transition-colors"
-          >
-            Already have an account?
-          </button>
-          <button className="text-gray-700 hover:text-gray-900 underline transition-colors">
-            Need Help?
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-// Homepage Component
-const Homepage = ({ onLogout }) => {
-  const [userStats] = useState({
+const Home = () => {
+  const [activeTab, setActiveTab] = useState('daily');
+  const [userStats, setUserStats] = useState({
     totalProblems: 342,
     weeklySubmissions: 28,
     currentStreak: 12,
     globalRank: 1247
   });
 
+  // Mock data for platforms
   const platformData = [
     { name: 'LeetCode', solved: 145, total: 2500, rating: 1654, streak: 12, color: 'bg-yellow-500' },
     { name: 'Codeforces', solved: 89, total: 8000, rating: 1432, streak: 8, color: 'bg-blue-500' },
@@ -371,13 +18,28 @@ const Homepage = ({ onLogout }) => {
     { name: 'HackerRank', solved: 41, total: 1200, rating: 1723, streak: 12, color: 'bg-green-500' }
   ];
 
-  const leaderboard = [
-    { id: 1, name: 'Alex Chen', avatar: '👨‍💻', dailyPoints: 15, totalSolved: 456, streak: 15, change: '+2' },
-    { id: 2, name: 'Sarah Kim', avatar: '👩‍💻', dailyPoints: 12, totalSolved: 389, streak: 8, change: '-1' },
-    { id: 3, name: 'You', avatar: '🚀', dailyPoints: 9, totalSolved: 342, streak: 12, change: '+1' },
-    { id: 4, name: 'Mike Johnson', avatar: '⚡', dailyPoints: 8, totalSolved: 298, streak: 4, change: '-2' },
-    { id: 5, name: 'Lisa Wong', avatar: '🎯', dailyPoints: 6, totalSolved: 267, streak: 6, change: '0' }
+  // Mock leaderboard data
+  const [leaderboard, setLeaderboard] = useState([
+    { id: 1, name: 'Alex Chen', avatar: '👨‍💻', dailyPoints: 15, weeklyPoints: 89, totalSolved: 456, streak: 15, change: '+2' },
+    { id: 2, name: 'Sarah Kim', avatar: '👩‍💻', dailyPoints: 12, weeklyPoints: 76, totalSolved: 389, streak: 8, change: '-1' },
+    { id: 3, name: 'You', avatar: '🚀', dailyPoints: 9, weeklyPoints: 67, totalSolved: 342, streak: 12, change: '+1' },
+    { id: 4, name: 'Mike Johnson', avatar: '⚡', dailyPoints: 8, weeklyPoints: 54, totalSolved: 298, streak: 4, change: '-2' },
+    { id: 5, name: 'Lisa Wong', avatar: '🎯', dailyPoints: 6, weeklyPoints: 43, totalSolved: 267, streak: 6, change: '0' }
+  ]);
+
+  // Mock activity feed
+  const activityFeed = [
+    { user: 'Alex Chen', action: 'solved 3 Hard problems on LeetCode', time: '2 hours ago', platform: 'LeetCode' },
+    { user: 'Sarah Kim', action: 'achieved new rating 1589 on Codeforces', time: '4 hours ago', platform: 'Codeforces' },
+    { user: 'Mike Johnson', action: 'completed Daily Challenge on CodeChef', time: '6 hours ago', platform: 'CodeChef' },
+    { user: 'Lisa Wong', action: 'maintained 6-day streak on HackerRank', time: '1 day ago', platform: 'HackerRank' }
   ];
+
+  const getRankChangeIcon = (change) => {
+    if (change.startsWith('+')) return <TrendingUp className="w-4 h-4 text-green-400" />;
+    if (change.startsWith('-')) return <TrendingUp className="w-4 h-4 text-red-400 rotate-180" />;
+    return <div className="w-4 h-4" />;
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-800 to-slate-700 text-white">
@@ -401,12 +63,6 @@ const Homepage = ({ onLogout }) => {
                 <div className="text-2xl font-bold text-blue-400">#{userStats.globalRank}</div>
                 <div className="text-sm text-gray-400">Global Rank</div>
               </div>
-              <button
-                onClick={onLogout}
-                className="px-4 py-2 bg-red-600 hover:bg-red-700 rounded-lg text-sm transition-colors"
-              >
-                Logout
-              </button>
             </div>
           </div>
         </div>
@@ -415,8 +71,10 @@ const Homepage = ({ onLogout }) => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
-          {/* Platform Progress */}
-          <div className="lg:col-span-2">
+          {/* Left Column - Platform Progress */}
+          <div className="lg:col-span-2 space-y-6">
+            
+            {/* Platform Stats Grid */}
             <div className="bg-slate-800 bg-opacity-60 backdrop-blur-sm rounded-2xl p-6">
               <h2 className="text-xl font-bold mb-4 flex items-center">
                 <Target className="w-6 h-6 mr-2 text-orange-400" />
@@ -457,22 +115,71 @@ const Homepage = ({ onLogout }) => {
                 ))}
               </div>
             </div>
-          </div>
 
-          {/* Leaderboard */}
-          <div>
+            {/* Activity Feed */}
             <div className="bg-slate-800 bg-opacity-60 backdrop-blur-sm rounded-2xl p-6">
               <h2 className="text-xl font-bold mb-4 flex items-center">
-                <Trophy className="w-6 h-6 mr-2 text-yellow-400" />
-                Friends Leaderboard
+                <Calendar className="w-6 h-6 mr-2 text-blue-400" />
+                Recent Activity
               </h2>
-              
+              <div className="space-y-3">
+                {activityFeed.map((activity, index) => (
+                  <div key={index} className="flex items-center space-x-3 p-3 bg-slate-700 bg-opacity-30 rounded-lg">
+                    <div className="w-2 h-2 bg-orange-400 rounded-full"></div>
+                    <div className="flex-1">
+                      <span className="font-semibold text-orange-400">{activity.user}</span>
+                      <span className="ml-2">{activity.action}</span>
+                      <div className="text-xs text-gray-400 mt-1">{activity.time} • {activity.platform}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column - Leaderboard */}
+          <div className="space-y-6">
+            
+            {/* Leaderboard */}
+            <div className="bg-slate-800 bg-opacity-60 backdrop-blur-sm rounded-2xl p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h2 className="text-xl font-bold flex items-center">
+                  <Trophy className="w-6 h-6 mr-2 text-yellow-400" />
+                  Friends Leaderboard
+                </h2>
+              </div>
+
+              {/* Tab Navigation */}
+              <div className="flex space-x-2 mb-4">
+                <button
+                  onClick={() => setActiveTab('daily')}
+                  className={`px-3 py-1 text-sm rounded-lg transition-colors ${
+                    activeTab === 'daily' 
+                      ? 'bg-orange-500 text-white' 
+                      : 'bg-slate-700 text-gray-300 hover:bg-slate-600'
+                  }`}
+                >
+                  Daily
+                </button>
+                <button
+                  onClick={() => setActiveTab('weekly')}
+                  className={`px-3 py-1 text-sm rounded-lg transition-colors ${
+                    activeTab === 'weekly' 
+                      ? 'bg-orange-500 text-white' 
+                      : 'bg-slate-700 text-gray-300 hover:bg-slate-600'
+                  }`}
+                >
+                  Weekly
+                </button>
+              </div>
+
+              {/* Leaderboard List */}
               <div className="space-y-3">
                 {leaderboard.map((user, index) => (
                   <div key={user.id} className={`flex items-center space-x-3 p-3 rounded-lg transition-all ${
                     user.name === 'You' 
                       ? 'bg-orange-500 bg-opacity-20 border border-orange-500 border-opacity-30' 
-                      : 'bg-slate-700 bg-opacity-30'
+                      : 'bg-slate-700 bg-opacity-30 hover:bg-slate-700 hover:bg-opacity-50'
                   }`}>
                     <div className="flex items-center space-x-3 flex-1">
                       <div className={`w-8 h-8 rounded-full flex items-center justify-center text-lg font-bold ${
@@ -492,60 +199,47 @@ const Homepage = ({ onLogout }) => {
                     </div>
                     
                     <div className="text-right">
-                      <div className="font-bold text-orange-400">{user.dailyPoints}pts</div>
-                      <div className="text-xs text-gray-400">{user.change}</div>
+                      <div className="font-bold text-orange-400">
+                        {activeTab === 'daily' ? user.dailyPoints : user.weeklyPoints}pts
+                      </div>
+                      <div className="flex items-center justify-end space-x-1">
+                        {getRankChangeIcon(user.change)}
+                        <span className="text-xs text-gray-400">{user.change}</span>
+                      </div>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
+
+            {/* Quick Stats */}
+            <div className="bg-slate-800 bg-opacity-60 backdrop-blur-sm rounded-2xl p-6">
+              <h3 className="text-lg font-bold mb-4 flex items-center">
+                <Star className="w-5 h-5 mr-2 text-purple-400" />
+                This Week
+              </h3>
+              <div className="space-y-3">
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Submissions</span>
+                  <span className="font-semibold text-green-400">28</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">New Problems</span>
+                  <span className="font-semibold text-blue-400">12</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Contest Rank</span>
+                  <span className="font-semibold text-yellow-400">#156</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-400">Points Earned</span>
+                  <span className="font-semibold text-orange-400">67</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
-};
-
-// Main App Component
-const App = () => {
-  const [currentScreen, setCurrentScreen] = useState('welcome'); // 'welcome', 'login', 'signup', 'homepage'
-
-  const handleLoginSuccess = () => {
-    setCurrentScreen('homepage');
-  };
-
-  const handleLogout = () => {
-    setCurrentScreen('welcome');
-  };
-
-  return (
-    <div>
-      {currentScreen === 'welcome' && (
-        <Home 
-          onLoginClick={() => setCurrentScreen('login')}
-          onSignupClick={() => setCurrentScreen('signup')}
-        />
-      )}
-      
-      {currentScreen === 'login' && (
-        <LoginScreen 
-          onLoginSuccess={handleLoginSuccess}
-          onBackToWelcome={() => setCurrentScreen('welcome')}
-          onSignupClick={() => setCurrentScreen('signup')}
-        />
-      )}
-      
-      {currentScreen === 'signup' && (
-        <SignupScreen 
-          onSignupSuccess={() => setCurrentScreen('login')}
-          onBackToWelcome={() => setCurrentScreen('welcome')}
-          onLoginClick={() => setCurrentScreen('login')}
-        />
-      )}
-      
-      {currentScreen === 'homepage' && (
-        <Homepage onLogout={handleLogout} />
-      )}
     </div>
   );
 };
