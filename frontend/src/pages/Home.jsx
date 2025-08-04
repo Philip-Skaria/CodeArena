@@ -42,7 +42,7 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-800 to-slate-700 text-white">
+    <div className="min-h-screen bg-gradient-to-br bg-gray-900 text-white">
       {/* Header */}
       <header className="bg-slate-900 bg-opacity-50 backdrop-blur-sm border-b border-slate-600">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">

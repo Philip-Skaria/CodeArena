@@ -13,7 +13,7 @@ const WelcomePage = () => {
         navigate('/signup')
     }
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-800 to-slate-700 flex items-center justify-center relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br bg-gray-900 flex items-center justify-center relative overflow-hidden">
       {/* Background Geometric Shapes */}
       <div className="absolute inset-0">
         <div className="absolute top-16 left-8 w-96 h-60 bg-gradient-to-br from-orange-500 to-orange-600 rounded-3xl transform -rotate-12 opacity-90"></div>
