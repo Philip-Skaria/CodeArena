@@ -147,13 +147,13 @@ const Login = () => {
         <div className="flex justify-between items-center mt-6 text-sm">
           <button
             onClick={handleRegister}
-            className="text-gray-700 hover:text-gray-900 underline transition-colors cursor-pointer"
+            className="text-gray-700 hover:text-gray-900 transition-colors cursor-pointer"
           >
             Register
           </button>
           <button
             onClick={handleForgotPassword}
-            className="text-gray-700 hover:text-gray-900 underline transition-colors cursor-pointer"
+            className="text-gray-700 hover:text-gray-900 transition-colors cursor-pointer"
           >
             Forgot Password?
           </button>

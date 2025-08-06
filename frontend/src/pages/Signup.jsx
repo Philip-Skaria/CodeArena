@@ -24,6 +24,15 @@ const Signup = () => {
     navigate('/home');
   };
 
+  const handleAlreadyHaveAnAccount=()=>{
+    console.log('navigate to login page');
+    navigate('/login')
+  }
+  const handleNeedHelp=()=>{
+    console.log('navigate to need help page');
+    navigate('/needhelp');
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br bg-gray-900 flex items-center justify-center relative overflow-hidden">
       <div className="absolute inset-0">
@@ -102,12 +111,16 @@ const Signup = () => {
         </div>
 
         <div className="flex justify-between items-center mt-6 text-sm">
-          <a href="/login" className="text-gray-700 hover:text-gray-900 underline transition-colors">
-            Already have an account?
-          </a>
-          <a href="/forgot-password" className="text-gray-700 hover:text-gray-900 underline transition-colors">
-            Need Help?
-          </a>
+          <button
+            onClick={handleAlreadyHaveAnAccount}
+            className="text-gray-700 hover:text-gray-900 transition-colors">
+              Already have an account?
+          </button>
+          <button
+            onClick={handleNeedHelp}
+            className="text-gray-700 hover:text-gray-900 transition-colors">
+              Need help?
+          </button>
         </div>
       </div>
     </div>
