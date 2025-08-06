@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Trophy, Target, Users, TrendingUp, Calendar, Star, Zap, Code, Award } from 'lucide-react';
+import {useNavigate} from 'react-router-dom'
 
 const Home = () => {
   const [activeTab, setActiveTab] = useState('daily');

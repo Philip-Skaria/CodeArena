@@ -22,6 +22,7 @@ const Login = () => {
   const handleForgotPassword = () => {
     console.log('Navigate to forgot password page');
     // Add navigation to forgot password page
+    navigate('/forgotpassword');
   };
 
   return (
