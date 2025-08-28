@@ -1,71 +1,69 @@
-const express=require('express');
-const cors=require('cors');
+const express = require('express');
+const cors = require('cors');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 
-const app=express();
-const PORT=3000;
+// Import middleware
+const logger = require('./middleware/logger');
+const errorHandler = require('./middleware/errorHandler');
+const customCors = require('./middleware/cors');
 
-//middleware
-app.use(cors());
-app.use(express.json());
+// Import routes
+const apiRoutes = require('./routes');
 
-app.use((req,res,next)=>{
-    console.log(`${new Date().toISOString()} - ${req.method} - ${req.path}`);
-    next();
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Security middleware
+app.use(helmet());
+
+// Rate limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100 // limit each IP to 100 requests per windowMs
+});
+app.use('/api/', limiter);
+
+// Advanced middleware
+app.use(customCors);
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// Advanced logging middleware
+app.use(logger);
+
+// API routes
+app.use('/api', apiRoutes);
+
+// 404 handler
+app.use('*', (req, res) => {
+  res.status(404).json({
+    success: false,
+    error: 'route_not_found',
+    message: 'This endpoint does not exist',
+    path: req.originalUrl,
+    timestamp: new Date().toISOString()
+  });
 });
 
-//routes
-app.get('/',(req,res)=>{
-    res.json({
-        message:'Welcome to CodeArena API',
-        status:'server is running perfectly',
-        version: '1.0.0',
-        timestamp:new Date().toISOString()
-    })
-})
+// Global error handler (must be last)
+app.use(errorHandler);
 
-app.get('/health',(req,res)=>{
-    res.json({
-        status:'Healthy',
-        uptime:`${Math.floor(process.uptime())} seconds`,
-        memory:`${Math.round(process.memoryUsage().heapUsed/1024/1024)} MB`
-    });
+// Start server
+app.listen(PORT, () => {
+  console.log(`🚀 CodeArena backend is running on port ${PORT}`);
+  console.log(`🔗 API Base URL: http://localhost:${PORT}/api`);
+  console.log(`🏥 Health Check: http://localhost:${PORT}/api/health`);
 });
 
-app.get('/api/test',(req,res)=>{
-    res.json({
-        message:'test endpoint is working',
-        method:req.method,
-        path:req.path,
-        query:req.query
-    });
+// Graceful shutdown
+process.on('SIGINT', () => {
+  console.log('\n🛑 Server is shutting down gracefully...');
+  process.exit(0);
 });
 
-app.use('*',(req,res)=>{
-    res.status(404).json({
-        error:'route not found',
-        path:req.originalUrl,
-        message:'this endpoint does not exist'
-
-    });
-});
-
-app.use((err,req,res,next)=>{
-    console.error('server error',err.stack);
-    res.status(500).json({
-        error:"internal server error:",
-        message:'somethibngf went wrong on our end'
-    });
-});
-
-
-//start server
-app.listen(PORT,()=>{
-    console.log("CodeArena backend is working");
-});
-
-//graceful shutdown
-process.on('SIGINT',()=>{
-    console.log('server is shutting down gracefully');
-    process.exit(0);
+process.on('SIGTERM', () => {
+  console.log('\n🛑 Server is shutting down gracefully...');
+  process.exit(0);
 });
 
